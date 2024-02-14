@@ -7,6 +7,6 @@ module "app_infra" {
   project_name     = "ecs-next-tf"
   node_env         = "production"
   env              = "live"
-  desired_count    = 1
+  desired_count    = 2
   docker_image_tag = var.docker_image_tag
 }
