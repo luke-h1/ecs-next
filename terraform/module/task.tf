@@ -27,7 +27,7 @@ resource "aws_ecs_task_definition" "application_task" {
         }
       },
       "memory": 512,
-      "cpu": 512
+      "cpu": 256
     }
   ]
   DEFINITION
