@@ -79,6 +79,14 @@ resource "aws_security_group" "application_service_security_group" {
     security_groups = ["${aws_security_group.application_load_balancer_security_group.id}"]
   }
 
+  ingress {
+    from_port       = 80
+    to_port         = 80
+    protocol        = "tcp"
+    security_groups = ["${aws_security_group.application_load_balancer_security_group.id}"]
+
+  }
+
   egress {
     from_port   = 0
     to_port     = 0
