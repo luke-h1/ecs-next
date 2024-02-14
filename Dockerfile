@@ -19,6 +19,7 @@ COPY . .
 
 RUN corepack enable
 
+RUN pnpm i
 RUN pnpm build
 
 USER node 
