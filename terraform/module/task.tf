@@ -26,8 +26,8 @@ resource "aws_ecs_task_definition" "application_task" {
           "awslogs-stream-prefix": "${var.project_name}-"
         }
       },
-      "memory": 512,
-      "cpu": 256
+      "memory": 256,
+      "cpu": 512
     }
   ]
   DEFINITION
