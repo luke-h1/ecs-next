@@ -4,9 +4,9 @@ resource "aws_iam_role_policy_attachment" "ecsTaskExecutionRole_policy" {
 }
 
 resource "aws_iam_role" "task_execution_role" {
-  name = var.project_name
+  name = "${var.project_name}-${var.env}-role"
 
-  assume_role_policy = jsondecode({
+  assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
       {
@@ -19,6 +19,7 @@ resource "aws_iam_role" "task_execution_role" {
       }
     ]
   })
+
   tags = {
     Environment = var.env
   }
