@@ -3,6 +3,10 @@ resource "aws_default_vpc" "default_vpc" {
 
 resource "aws_ecs_cluster" "application_cluster" {
   name = "${var.project_name}-cluster-${var.env}"
+  setting {
+    name  = "containerInsights"
+    value = "enabled"
+  }
 }
 
 resource "aws_default_subnet" "application_subnet_a" {
