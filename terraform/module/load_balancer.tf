@@ -63,7 +63,7 @@ resource "aws_lb_target_group" "application_target_group" {
 
   health_check {
     matcher             = "200,301,302"
-    path                = "/"
+    path                = "/api/healthcheck"
     interval            = 300
     timeout             = 60
     unhealthy_threshold = 5
