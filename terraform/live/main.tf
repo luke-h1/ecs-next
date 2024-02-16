@@ -4,7 +4,7 @@ provider "aws" {
 
 module "app_infra" {
   source           = "../module"
-  project_name     = "ecs-next-tf"
+  project_name     = "ecs-next"
   node_env         = "production"
   env              = "live"
   desired_count    = 1
