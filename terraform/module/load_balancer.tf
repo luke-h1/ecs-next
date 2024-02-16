@@ -74,7 +74,7 @@ resource "aws_lb_listener" "application_http" {
   load_balancer_arn = aws_alb.application_load_balancer.arn
   port              = "443"
   protocol          = "HTTPS"
-  certificate_arn   = "arn:aws:elasticloadbalancing:eu-west-2:753493924839:loadbalancer/app/ecs-next-tf-lb-live/f877e6043592161f"
+  certificate_arn   = "arn:aws:acm:eu-west-2:753493924839:certificate/c96c4e59-bd8e-416d-987d-77929e0f6a23"
   default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.application_target_group.arn
