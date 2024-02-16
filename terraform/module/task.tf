@@ -67,6 +67,7 @@ resource "aws_appautoscaling_target" "ecs_target" {
   service_namespace  = "ecs"
 }
 
+
 resource "aws_appautoscaling_policy" "ecs_policy" {
   name               = "cpu-utilization"
   policy_type        = "TargetTrackingScaling"
@@ -79,6 +80,7 @@ resource "aws_appautoscaling_policy" "ecs_policy" {
       predefined_metric_type = "ECSServiceAverageCPUUtilization"
     }
 
-    target_value = 75.0
+    target_value      = 75.0
+    scale_in_cooldown = 90
   }
 }
