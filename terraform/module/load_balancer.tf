@@ -57,7 +57,7 @@ resource "aws_security_group" "application_load_balancer_security_group" {
 resource "aws_lb_target_group" "application_target_group" {
   name        = "${var.project_name}-tg-${var.env}"
   port        = 80
-  protocol    = "HTTP"
+  protocol    = "HTTPS"
   target_type = "ip"
   vpc_id      = aws_default_vpc.default_vpc.id
 
