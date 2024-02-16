@@ -17,3 +17,4 @@ https://ecs-next-cxdubo3u1-luke-h1.vercel.app/
 - configure prometheus and grafana for monitoring and alerting - house this in different repository (rework automation repo)
 - configure cloudflare for ddos protection
 - look into cloudfront
+- ensure migration plan makes sense and is durable from deploy to deploy
