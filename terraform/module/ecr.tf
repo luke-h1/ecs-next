@@ -1,5 +1,5 @@
 resource "aws_ecr_repository" "application_ecr_repo" {
-  name         = "${var.project_name}-repo-${var.env}-ecr"
+  name         = "${var.project_name}-${var.env}"
   force_delete = true
   tags = {
     Environment = var.env
