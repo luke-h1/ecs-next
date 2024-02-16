@@ -57,7 +57,7 @@ resource "aws_security_group" "application_load_balancer_security_group" {
 resource "aws_lb_target_group" "application_target_group" {
   name        = "${var.project_name}-tg-${var.env}"
   port        = 80
-  protocol    = "HTTPS"
+  protocol    = "HTTP"
   target_type = "ip"
   vpc_id      = aws_default_vpc.default_vpc.id
 
@@ -72,8 +72,8 @@ resource "aws_lb_target_group" "application_target_group" {
 
 resource "aws_lb_listener" "application_http" {
   load_balancer_arn = aws_alb.application_load_balancer.arn
-  port              = "80"
-  protocol          = "HTTP"
+  port              = "443"
+  protocol          = "HTTPS"
 
   default_action {
     type             = "forward"
