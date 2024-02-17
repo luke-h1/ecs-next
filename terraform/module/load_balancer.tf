@@ -90,7 +90,7 @@ resource "aws_lb_listener" "web_http" {
   }
 }
 
-resource "aws_lb_listener" "application_http" {
+resource "aws_lb_listener" "web_https" {
   load_balancer_arn = aws_alb.application_load_balancer.arn
   port              = 443
   protocol          = "HTTPS"
