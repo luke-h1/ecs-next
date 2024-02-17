@@ -17,7 +17,7 @@ resource "aws_s3_bucket_versioning" "ecs-next-tf-state" {
 
 # encrypt state files
 resource "aws_s3_bucket_server_side_encryption_configuration" "ecs-next-tf-state" {
-  bucket = aws_s3_bucket.terraform_state.id
+  bucket = aws_s3_bucket.ecs-next-tf-state.id
 
   rule {
     apply_server_side_encryption_by_default {
