@@ -74,9 +74,9 @@ resource "aws_lb_target_group" "application_target_group" {
 }
 
 # Redirect HTTP to HTTPS
-resource "aws_lb_listener" "http_redirect" {
+resource "aws_lb_listener" "web_http" {
   load_balancer_arn = aws_alb.application_load_balancer.arn
-  port              = "80"
+  port              = 80
   protocol          = "HTTP"
 
   default_action {
@@ -90,7 +90,18 @@ resource "aws_lb_listener" "http_redirect" {
   }
 }
 
+resource "aws_lb_listener" "web_https" {
+  load_balancer_arn = aws_alb.application_load_balancer.arn
+  port              = 443
+  protocol          = "HTTPS"
+  certificate_arn   = aws_acm_certificate_validation.domain.certificate_arn
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.application_target_group.arn
+  }
+}
 
+# redirect 
 resource "aws_lb_listener" "application_http" {
   load_balancer_arn = aws_alb.application_load_balancer.arn
   port              = "443"
@@ -102,27 +113,16 @@ resource "aws_lb_listener" "application_http" {
   }
 }
 
-resource "aws_lb_listener_rule" "http_redirect" {
-  listener_arn = aws_lb_listener.application_http.arn
-  priority     = 100
-
-  action {
-    type = "redirect"
-    redirect {
-      host        = var.domain
-      port        = "443"
-      protocol    = "HTTPS"
-      status_code = "HTTP_301"
-    }
-  }
-
-  condition {
-    host_header {
-      values = ["www.${var.domain}"]
-    }
+resource "aws_route53_record" "alb" {
+  zone_id = data.aws_route53_zone.domain.zone_id
+  name    = var.domain
+  type    = "A"
+  alias {
+    name                   = data.terraform_remote_state.outputs.alb_dns_name
+    zone_id                = data.terraform_remote_state.outputs.alb_zone_id
+    evaluate_target_health = true
   }
 }
-
 
 resource "aws_security_group" "application_service_security_group" {
   ingress {
