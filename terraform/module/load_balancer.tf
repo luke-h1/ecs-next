@@ -94,8 +94,7 @@ resource "aws_lb_listener" "web_https" {
   load_balancer_arn = aws_alb.application_load_balancer.arn
   port              = 443
   protocol          = "HTTPS"
-  # certificate_arn   = aws_acm_certificate_validation.domain.certificate_arn
-  certificate_arn = "arn:aws:acm:eu-west-2:753493924839:certificate/c96c4e59-bd8e-416d-987d-77929e0f6a23"
+  certificate_arn   = aws_acm_certificate_validation.domain.certificate_arn
   default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.application_target_group.arn
@@ -114,16 +113,16 @@ resource "aws_lb_listener" "web_https" {
 #   }
 # }
 
-# resource "aws_route53_record" "alb" {
-#   zone_id = data.aws_route53_zone.domain.zone_id
-#   name    = var.domain
-#   type    = "A"
-#   alias {
-#     name                   = aws_alb.application_load_balancer.dns_name
-#     zone_id                = aws_alb.application_load_balancer.zone_id
-#     evaluate_target_health = true
-#   }
-# }
+resource "aws_route53_record" "alb" {
+  zone_id = data.aws_route53_zone.domain.zone_id
+  name    = var.domain
+  type    = "A"
+  alias {
+    name                   = aws_alb.application_load_balancer.dns_name
+    zone_id                = aws_alb.application_load_balancer.zone_id
+    evaluate_target_health = true
+  }
+}
 
 resource "aws_security_group" "application_service_security_group" {
   ingress {
