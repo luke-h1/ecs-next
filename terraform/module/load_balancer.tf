@@ -92,7 +92,7 @@ resource "aws_lb_listener" "http_redirect" {
 
 
 resource "aws_lb_listener" "application_http" {
-  load_balancer_arn = aws_lb_listener.http_redirect.arn
+  load_balancer_arn = aws_alb.application_load_balancer.arn
   port              = "443"
   protocol          = "HTTPS"
   certificate_arn   = "arn:aws:acm:eu-west-2:753493924839:certificate/c96c4e59-bd8e-416d-987d-77929e0f6a23"
