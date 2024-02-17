@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
     bucket  = "ecs-next-tf-state"
-    key     = "${var.env}/terraform.tfstate"
+    key     = "live/terraform.tfstate"
     region  = "eu-west-2"
     encrypt = true
   }
