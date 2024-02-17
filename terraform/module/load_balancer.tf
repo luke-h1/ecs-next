@@ -118,8 +118,8 @@ resource "aws_route53_record" "alb" {
   name    = var.domain
   type    = "A"
   alias {
-    name                   = data.terraform_remote_state.outputs.alb_dns_name
-    zone_id                = data.terraform_remote_state.outputs.alb_zone_id
+    name                   = data.terraform_remote_state.infrastructure.alb_dns_name
+    zone_id                = data.terraform_remote_state.infrastructure.alb_zone_id
     evaluate_target_health = true
   }
 }
