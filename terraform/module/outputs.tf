@@ -14,14 +14,3 @@ output "alb_target_group_arn" {
 output "alb_listener_arn" {
   value = aws_lb_listener.web_https.arn
 }
-
-
-data "terraform_remote_state" "outputs" {
-  backend = "s3"
-  config = {
-    bucket  = "ecs-next-tf-state"
-    key     = "live/terraform.tfstate"
-    region  = "eu-west-2"
-    encrypt = true
-  }
-}
