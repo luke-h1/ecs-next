@@ -90,26 +90,27 @@ resource "aws_lb_listener" "http_redirect" {
   }
 }
 
-# resource "aws_lb_listener_rule" "www_redirect" {
-#   listener_arn = aws_lb_listener.application_http.arn
+resource "aws_lb_listener_rule" "redirect" {
+  listener_arn = aws_alb.application_load_balancer.arn
+  priority     = 100
 
-#   action {
-#     type = "redirect"
+  action {
+    type = "redirect"
+    redirect {
+      host        = var.domain
+      port        = "443"
+      protocol    = "HTTPS"
+      status_code = "HTTP_301"
+    }
+  }
 
-#     redirect {
-#       host        = "${replace(var.root_domain, "www.", "")}"
-#       port        = "443"
-#       protocol    = "HTTPS"
-#       status_code = "HTTP_301"
-#     }
-#   }
+  condition {
+    host_header {
+      values = ["www.${var.domain}"]
+    }
+  }
+}
 
-#   condition {
-#     host_header {
-#       values = ["www.${var.root_domain}"]
-#     }
-#   }
-# }
 
 resource "aws_lb_listener" "application_http" {
   load_balancer_arn = aws_alb.application_load_balancer.arn
@@ -120,7 +121,6 @@ resource "aws_lb_listener" "application_http" {
     type             = "forward"
     target_group_arn = aws_lb_target_group.application_target_group.arn
   }
-
 }
 
 resource "aws_security_group" "application_service_security_group" {

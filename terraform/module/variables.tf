@@ -24,3 +24,8 @@ variable "node_env" {
   description = "The node environment"
   default     = "production"
 }
+
+variable "domain" {
+  type        = string
+  description = "The domain to use for the application"
+}

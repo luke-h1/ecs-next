@@ -9,4 +9,5 @@ module "app_infra" {
   env              = "live"
   desired_count    = 1
   docker_image_tag = var.docker_image_tag
+  domain           = "lhowsam.site"
 }
