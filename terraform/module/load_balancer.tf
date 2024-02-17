@@ -114,16 +114,16 @@ resource "aws_lb_listener" "web_https" {
 #   }
 # }
 
-resource "aws_route53_record" "alb" {
-  zone_id = data.aws_route53_zone.domain.zone_id
-  name    = var.domain
-  type    = "A"
-  alias {
-    name                   = aws_alb.application_load_balancer.dns_name
-    zone_id                = aws_alb.application_load_balancer.zone_id
-    evaluate_target_health = true
-  }
-}
+# resource "aws_route53_record" "alb" {
+#   zone_id = data.aws_route53_zone.domain.zone_id
+#   name    = var.domain
+#   type    = "A"
+#   alias {
+#     name                   = aws_alb.application_load_balancer.dns_name
+#     zone_id                = aws_alb.application_load_balancer.zone_id
+#     evaluate_target_health = true
+#   }
+# }
 
 resource "aws_security_group" "application_service_security_group" {
   ingress {
