@@ -27,14 +27,14 @@ resource "aws_ecs_task_definition" "application_task" {
         }
       },
       "memory": 512,
-      "cpu": 1024
+      "cpu": 256
     }
   ]
   DEFINITION
   requires_compatibilities = ["FARGATE"]
   network_mode             = "awsvpc"
   memory                   = 512
-  cpu                      = 1024
+  cpu                      = 256
   execution_role_arn       = aws_iam_role.task_execution_role.arn
   task_role_arn            = aws_iam_role.task_execution_role.arn
 }
@@ -60,7 +60,7 @@ resource "aws_ecs_service" "application_ecs" {
 }
 
 resource "aws_appautoscaling_target" "ecs_target" {
-  max_capacity       = 2
+  max_capacity       = 3
   min_capacity       = 1
   resource_id        = "service/${aws_ecs_cluster.application_cluster.name}/${aws_ecs_service.application_ecs.name}"
   scalable_dimension = "ecs:service:DesiredCount"
