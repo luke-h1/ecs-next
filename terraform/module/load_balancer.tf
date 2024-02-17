@@ -103,7 +103,7 @@ resource "aws_lb_listener" "application_http" {
 }
 
 resource "aws_lb_listener_rule" "http_redirect" {
-  listener_arn = aws_lb_listener.application_http.arn
+  listener_arn = aws_lb_listener.application_http.load_balancer_arn
   priority     = 100
 
   action {
