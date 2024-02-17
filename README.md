@@ -9,7 +9,7 @@ https://ecs-next-cxdubo3u1-luke-h1.vercel.app/
 
 ### TODO
 
-- add www. > https redirect to ALB
+- add www. > https redirect to ALB - will need to get DNS name of ALB for this - see https://stackoverflow.com/questions/54413723/terraform-aws-how-to-get-dns-name-of-load-balancer-by-its-arn
 - don't build new docker image if no changes in certain files
 - configure TF for CI/CD user
 - provision s3 bucket with TF
